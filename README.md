@@ -87,7 +87,9 @@ Creating arrays for counting the number of repetitions of RGB components. (separ
 2. Width and Height of the image.
 3. Looping over successive pixels in the image.
 4. Get the RGB values.
-5. Adding one to an array with an index equal to the colour component.(wyjasnienie na rysunku)
+5. Adding one to an array with an index equal to the colour component.\
+Explanation of the code.
+![Wyjasnienie_Lab6](https://user-images.githubusercontent.com/72127610/116156315-98710080-a6eb-11eb-9a81-4750e095ba12.jpg)
 6. Creating new object plotRGB and invoke the drawPlot() method.
 ```java
  		File input = new File(picturePath);

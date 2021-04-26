@@ -76,4 +76,41 @@ The contrast is obtained by changing the angle of the line on the graph color ma
 				 }
          ...
 ```
+powModel class - new method for RGB charts - `wykresRgb()`\
+Creating arrays for counting the number of repetitions of RGB components. (separately for each component)
+```java
+		 int [] redd = new int[256];
+		 int [] greenn = new int[256];
+		 int [] bluee = new int[256];
+```
+1. Open image file for reading.
+2. Width and Height of the image.
+3. Looping over successive pixels in the image.
+4. Get the RGB values.
+5. Adding one to an array with an index equal to the colour component.(wyjasnienie na rysunku)
+6. Creating new object plotRGB and invoke the drwPlot() method.
+```java
+ 		File input = new File(picturePath);
+		 try {
+			image = ImageIO.read(input);
+		 }catch (IOException e1) {
+			e1.printStackTrace();
+		 }
+		 width = image.getWidth();
+		 height = image.getHeight();
 
+		 for(int i = 0; i < height; i++){
+			 for(int j = 0; j < width; j++){
+				 Color c = new Color(image.getRGB(j, i));
+				 int red = (int)(c.getRed());
+				 int green = (int)(c.getGreen());
+				 int blue = (int)(c.getBlue());
+	
+				 redd[red]++;
+				 greenn[green]++;
+				 bluee[blue]++;
+			 }
+		 }
+		 plotRGB pR = new plotRGB(redd, greenn, bluee);
+		 pR.drawPlot();
+```

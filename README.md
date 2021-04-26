@@ -88,7 +88,7 @@ Creating arrays for counting the number of repetitions of RGB components. (separ
 3. Looping over successive pixels in the image.
 4. Get the RGB values.
 5. Adding one to an array with an index equal to the colour component.(wyjasnienie na rysunku)
-6. Creating new object plotRGB and invoke the drwPlot() method.
+6. Creating new object plotRGB and invoke the drawPlot() method.
 ```java
  		File input = new File(picturePath);
 		 try {
@@ -114,3 +114,50 @@ Creating arrays for counting the number of repetitions of RGB components. (separ
 		 plotRGB pR = new plotRGB(redd, greenn, bluee);
 		 pR.drawPlot();
 ```
+public plotRGB class - is used to display histogram graphs for RGB components.\
+Initializing arrays with the help of the constructor.
+```java
+	private int [] red   = new int[256];
+	private int [] green = new int[256];
+	private int [] blue  = new int[256];
+	
+	public plotRGB(int[] red, int[] green, int[] blue){
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+	}
+	...
+```
+The main method - `drawPlot()` - displaying charts;\
+Adding a class object DrawingComponent(red, green, blue) to Jpanel.
+```java
+	    JPanel jcp = new JPanel(new BorderLayout());
+	    setContentPane(jcp);
+	    setTitle("RGB graph");
+	    setIconImage(imagesLoad.icon.getImage());
+	    jcp.add(new DrawingComponent(red, green, blue), BorderLayout.CENTER); 
+	    setSize(1500, 1500);
+	    setLocationRelativeTo(null);
+	    setVisible(true);
+```
+class DrawingComponent - is used to draw graphs for RGB components.\
+The main paint method  - paintComponent(Graphics gh).\
+Fill the background with black.
+```java
+      Graphics2D drp = (Graphics2D)gh;
+      drp.setColor(Color.black);
+      drp.fillRect(0, 0, 1500, 1500);
+```
+1. Set white color and draw line x-coordinate, y-coordinate for charts.
+2. Loop through array and drawLine(like a small rectangle, column) for histogram.
+3. This is what we do for each component from [0;255].
+```java
+      drp.setColor(Color.white);
+      drp.drawLine(0, 0, 300, 0);
+      drp.drawLine(0, 0, 0, 1500);
+      for(int i = 0; i < red.length; i++) {
+    	  drp.setColor(Color.red);
+    	  drp.drawLine(i, 0, i, red[i]);
+      }
+```
+The other two charts are analogical, but shifted to the right.
